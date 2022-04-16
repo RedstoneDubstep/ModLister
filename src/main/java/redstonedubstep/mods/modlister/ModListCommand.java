@@ -8,14 +8,14 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.Commands;
-import net.minecraft.command.arguments.GameProfileArgument;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.GameProfileArgument;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
 
 public class ModListCommand {
-	public static void register(CommandDispatcher<CommandSource> dispatcher) {
+	public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 		dispatcher.register(Commands.literal("modlist").requires(player -> player.hasPermission(3)).executes(ctx -> getModList(ctx, ctx.getSource().getPlayerOrException().getGameProfile(), false))
 				.then(Commands.argument("target", GameProfileArgument.gameProfile())
 						.executes(ctx -> getModList(ctx, GameProfileArgument.getGameProfiles(ctx, "target"), false))
@@ -25,29 +25,26 @@ public class ModListCommand {
 								.executes(ctx -> getModList(ctx, GameProfileArgument.getGameProfiles(ctx, "target"), false)))));
 	}
 
-	private static int getModList(CommandContext<CommandSource> ctx, GameProfile target, boolean allMods) {
+	private static int getModList(CommandContext<CommandSourceStack> ctx, GameProfile target, boolean allMods) {
 		return getModList(ctx, Collections.singleton(target), allMods);
 	}
 
-	private static int getModList(CommandContext<CommandSource> ctx, Collection<GameProfile> targets, boolean allMods) {
+	private static int getModList(CommandContext<CommandSourceStack> ctx, Collection<GameProfile> targets, boolean allMods) {
 		int success = 0;
 
 		for (GameProfile target : targets) {
 			List<String> modList = allMods ? ModLister.getAllMods(target) : ModLister.getCurrentMods(target);
-			TranslationTextComponent message;
+			TranslatableComponent message;
 
 			if (modList != null) {
-				message = new TranslationTextComponent(allMods ? "All the mods of target %1$s they ever joined with: %2$s" : "The mods of target %1$s in their current session: %2$s", target.getName(), String.join(", ", modList));
+				message = new TranslatableComponent(allMods ? "All the mods of target %1$s they ever joined with: %2$s" : "The mods of target %1$s in their current session: %2$s", target.getName(), String.join(", ", modList));
 				success++;
 			}
 			else
-				message = new TranslationTextComponent("No mod list of target %s was found", target.getName());
+				message = new TranslatableComponent("No mod list of target %s was found", target.getName());
 
-			if (ctx.getSource().getEntity() instanceof ServerPlayerEntity) {
-				ServerPlayerEntity player = (ServerPlayerEntity)ctx.getSource().getEntity();
-
+			if (ctx.getSource().getEntity() instanceof ServerPlayer player)
 				player.sendMessage(message, player.getUUID());
-			}
 			else
 				ctx.getSource().sendSuccess(message, false);
 		}
