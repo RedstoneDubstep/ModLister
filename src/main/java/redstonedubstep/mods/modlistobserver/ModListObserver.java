@@ -14,6 +14,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.network.NetworkConstants;
 
 @Mod(ModListObserver.MODID)
@@ -26,6 +27,7 @@ public class ModListObserver {
 	public ModListObserver() {
 		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 		MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModListObserverConfig.SERVER_SPEC);
 	}
 
 	public void registerCommands(RegisterCommandsEvent event) {
@@ -46,6 +48,7 @@ public class ModListObserver {
 		ALL_SESSION_MODS.putIfAbsent(player, modList);
 		ALL_SESSION_MODS.get(player).addAll(modList);
 
-		LOGGER.info("Player " + player.getName() + " connected with mods " + String.join(", ", modList));
+		if (ModListObserverConfig.CONFIG.logJoiningModList.get())
+			LOGGER.info("Player " + player.getName() + " connected with mods " + String.join(", ", modList));
 	}
 }
