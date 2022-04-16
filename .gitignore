@@ -1,0 +1,13 @@
+/bin
+/build
+/libs
+/lib
+/.project
+/.classpath
+/.gradle
+/.settings
+*.launch
+/run
+/src/generated/resources/.cache/*
+/.idea
+/logs

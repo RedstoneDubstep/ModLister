@@ -1,0 +1,10 @@
+{
+	"required": true,
+	"package": "redstonedubstep.mods.modlister.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "modlister.refmap.json",
+	"server": [
+		"MixinFMLHandshakeHandler"
+	],
+	"minVersion": "0.8"
+}
