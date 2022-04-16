@@ -9,22 +9,22 @@ modLoader = "javafml" #mandatory
 loaderVersion = "[36,)" #mandatory
 license = "All Rights Reserved"
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://www.github.com/RedstoneDubstep/ModLister/issues"
+issueTrackerURL="https://www.github.com/RedstoneDubstep/ModListObserver/issues"
 # A list of mods - how many allowed here is determined by the individual mod loader
 
 [[mods]] #mandatory
 # The modid of the mod
-modId = "modlister" #mandatory
+modId = "modlistobserver" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version = "${file.jarVersion}" #mandatory
 # A display name for the mod
-displayName = "ModLister" #mandatory
+displayName = "ModListObserver" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="modlister.png" #optional
+#logoFile="modlistobserver.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
@@ -34,7 +34,7 @@ description = '''
 This mod stores the mod lists of connecting clients
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-#[[dependencies.modlister]] #optional
+#[[dependencies.modlistobserver]] #optional
 #    # the modid of the dependency
 #    modId="forge" #mandatory
 #    # Does this dependency have to exist - if not, ordering below must be specified
@@ -46,7 +46,7 @@ This mod stores the mod lists of connecting clients
 #    # Side this dependency is applied on - BOTH, CLIENT or SERVER
 #    side="BOTH"
 # Here's another dependency
-#[[dependencies.modlister]]
+#[[dependencies.modlistobserver]]
 #    modId="minecraft"
 #    mandatory=true
 #    versionRange="[1.14.4]"
