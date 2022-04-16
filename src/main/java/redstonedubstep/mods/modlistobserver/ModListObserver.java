@@ -19,7 +19,7 @@ import net.minecraftforge.network.NetworkConstants;
 @Mod(ModListObserver.MODID)
 public class ModListObserver {
 	public static final String MODID = "modlistobserver";
-	private static final Map<GameProfile, Set<String>> ALL_MODS = new HashMap<>();
+	private static final Map<GameProfile, Set<String>> ALL_SESSION_MODS = new HashMap<>();
 	private static final Map<GameProfile, Set<String>> CURRENT_MODS = new HashMap<>();
 	private static final Logger LOGGER = LogManager.getLogger();
 
@@ -32,8 +32,8 @@ public class ModListObserver {
 		ModListCommand.register(event.getDispatcher());
 	}
 
-	public static Set<String> getAllMods(GameProfile player) {
-		return ALL_MODS.get(player);
+	public static Set<String> getAllSessionMods(GameProfile player) {
+		return ALL_SESSION_MODS.get(player);
 	}
 
 	public static Set<String> getCurrentMods(GameProfile player) {
@@ -43,8 +43,8 @@ public class ModListObserver {
 	public static void updateModListOnJoin(Set<String> modList, GameProfile player) {
 		CURRENT_MODS.put(player, modList);
 
-		ALL_MODS.putIfAbsent(player, modList);
-		ALL_MODS.get(player).addAll(modList);
+		ALL_SESSION_MODS.putIfAbsent(player, modList);
+		ALL_SESSION_MODS.get(player).addAll(modList);
 
 		LOGGER.info("Player " + player.getName() + " connected with mods " + String.join(", ", modList));
 	}
