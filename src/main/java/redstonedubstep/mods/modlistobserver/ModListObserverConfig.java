@@ -22,7 +22,7 @@ public class ModListObserverConfig {
 		Config(ForgeConfigSpec.Builder builder) {
 			logJoiningModList = builder
 					.comment(" --- ModListObserver Config File --- ", "Should the current mod list of joining players be logged?")
-					.define("logJoiningModList", false);
+					.define("logJoiningModList", true);
 		}
 	}
 }
