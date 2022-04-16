@@ -19,7 +19,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'redstonedubstep.mods'
 version = '1.0'
-archivesBaseName = 'modlister'
+archivesBaseName = 'modlistobserver'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -48,7 +48,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                modlister {
+                modlistobserver {
                     source sourceSets.main
                 }
             }
@@ -65,7 +65,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                modlister {
+                modlistobserver {
                     source sourceSets.main
                 }
             }
@@ -80,10 +80,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'modlister', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'modlistobserver', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                modlister {
+                modlistobserver {
                     source sourceSets.main
                 }
             }
@@ -125,20 +125,20 @@ dependencies {
 
 jar {
     manifest {
-        attributes(["Specification-Title": "ModLister",
+        attributes(["Specification-Title": "ModListObserver",
                     "Specification-Vendor": "Redstone_Dubstep",
                     "Specification-Version": "${version}",
-                    "Implementation-Title": "ModLister",
+                    "Implementation-Title": "ModListObserver",
                     "Implementation-Version": "${version}",
                     "Implementation-Vendor" :"Redstone_Dubstep",
                     "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                    "MixinConfigs": "modlister.mixins.json"])
+                    "MixinConfigs": "modlistobserver.mixins.json"])
     }
 }
 
 mixin {
-    add sourceSets.main, "modlister.refmap.json"
-    config 'modlister.mixins.json'
+    add sourceSets.main, "modlistobserver.refmap.json"
+    config 'modlistobserver.mixins.json'
 
     // debug.verbose = true
     // debug.export = true

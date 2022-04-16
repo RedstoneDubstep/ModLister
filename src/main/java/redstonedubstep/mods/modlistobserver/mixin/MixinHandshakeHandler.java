@@ -1,5 +1,6 @@
-package redstonedubstep.mods.modlister.mixin;
+package redstonedubstep.mods.modlistobserver.mixin;
 
+import java.util.HashSet;
 import java.util.function.Supplier;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.HandshakeHandler;
 import net.minecraftforge.network.HandshakeMessages.C2SModListReply;
 import net.minecraftforge.network.NetworkEvent.Context;
-import redstonedubstep.mods.modlister.ModLister;
+import redstonedubstep.mods.modlistobserver.ModListObserver;
 
 @Mixin(HandshakeHandler.class)
 public abstract class MixinHandshakeHandler {
@@ -28,7 +29,7 @@ public abstract class MixinHandshakeHandler {
 				profile = new GameProfile(Player.createPlayerUUID(profile.getName()), profile.getName());
 			}
 
-			ModLister.updateModList(clientModList.getModList(), profile);
+			ModListObserver.updateModListOnJoin(new HashSet<>(clientModList.getModList()), profile);
 		}
 	}
 }

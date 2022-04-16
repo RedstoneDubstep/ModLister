@@ -1,8 +1,8 @@
-package redstonedubstep.mods.modlister;
+package redstonedubstep.mods.modlistobserver;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
@@ -33,7 +33,7 @@ public class ModListCommand {
 		int success = 0;
 
 		for (GameProfile target : targets) {
-			List<String> modList = allMods ? ModLister.getAllMods(target) : ModLister.getCurrentMods(target);
+			Set<String> modList = allMods ? ModListObserver.getAllMods(target) : ModListObserver.getCurrentMods(target);
 			TranslatableComponent message;
 
 			if (modList != null) {
