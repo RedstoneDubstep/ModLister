@@ -12,8 +12,9 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.GameProfileArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class ModListCommand {
@@ -34,7 +35,7 @@ public class ModListCommand {
 
 	private static int getModList(CommandContext<CommandSourceStack> ctx, Collection<GameProfile> targets, boolean allMods) {
 		Set<String> modList = new HashSet<>();
-		TranslatableComponent message;
+		MutableComponent message;
 
 		for (GameProfile target : targets) {
 			modList.addAll(allMods ? ModListObserver.getAllSessionMods(target) : ModListObserver.getCurrentMods(target));
@@ -44,17 +45,17 @@ public class ModListCommand {
 			GameProfile target = targets.iterator().next();
 
 			if (modList.isEmpty())
-				message = new TranslatableComponent("No mod list of target %s was found", target.getName());
+				message = Component.translatable("No mod list of target %s was found", target.getName());
 			else
-				message = new TranslatableComponent(allMods ? "All mods target %1$s joined the server with since the last server restart: %2$s" : "The mods target %1$s last joined the server with: %2$s", target.getName(), ComponentUtils.formatList(modList));
+				message = Component.translatable(allMods ? "All mods target %1$s joined the server with since the last server restart: %2$s" : "The mods target %1$s last joined the server with: %2$s", target.getName(), ComponentUtils.formatList(modList));
 		}
 		else if (modList.isEmpty())
-			message = new TranslatableComponent("No mod lists of the %s targets were found", targets.size());
+			message = Component.translatable("No mod lists of the %s targets were found", targets.size());
 		else
-			message = new TranslatableComponent(allMods ? "All mods the %1$s targets joined the server with since the last server restart: %2$s" : "The mods the %1$s targets last joined the server with: %2$s", targets.size(), ComponentUtils.formatList(modList));
+			message = Component.translatable(allMods ? "All mods the %1$s targets joined the server with since the last server restart: %2$s" : "The mods the %1$s targets last joined the server with: %2$s", targets.size(), ComponentUtils.formatList(modList));
 
 		if (ctx.getSource().getEntity() instanceof ServerPlayer player)
-			player.sendMessage(message, player.getUUID());
+			player.sendSystemMessage(message);
 		else
 			ctx.getSource().sendSuccess(message, false);
 
