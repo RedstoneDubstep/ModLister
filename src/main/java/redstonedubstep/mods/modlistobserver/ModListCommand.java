@@ -44,12 +44,12 @@ public class ModListCommand {
 			GameProfile target = targets.iterator().next();
 
 			if (modList.isEmpty())
-				message = new TranslatableComponent("No mod list of target %s was found", target.getName());
+				message = new TranslatableComponent("No mods of target %s were found", target.getName());
 			else
 				message = new TranslatableComponent(allMods ? "All mods target %1$s joined the server with since the last server restart: %2$s" : "The mods target %1$s last joined the server with: %2$s", target.getName(), ComponentUtils.formatList(modList));
 		}
 		else if (modList.isEmpty())
-			message = new TranslatableComponent("No mod lists of the %s targets were found", targets.size());
+			message = new TranslatableComponent("No mods of the %s targets were found", targets.size());
 		else
 			message = new TranslatableComponent(allMods ? "All mods the %1$s targets joined the server with since the last server restart: %2$s" : "The mods the %1$s targets last joined the server with: %2$s", targets.size(), ComponentUtils.formatList(modList));
 

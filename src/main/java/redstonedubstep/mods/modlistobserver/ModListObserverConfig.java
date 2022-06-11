@@ -18,11 +18,15 @@ public class ModListObserverConfig {
 
 	public static class Config {
 		public BooleanValue logJoiningModList;
+		public BooleanValue logServerMods;
 
 		Config(ForgeConfigSpec.Builder builder) {
 			logJoiningModList = builder
 					.comment(" --- ModListObserver Config File --- ", "Should the current mod list of joining players be logged?")
 					.define("logJoiningModList", true);
+			logServerMods = builder
+					.comment("Should mods of a joining player that are also present on the server be logged?")
+					.define("logServerMods", true);
 		}
 	}
 }
