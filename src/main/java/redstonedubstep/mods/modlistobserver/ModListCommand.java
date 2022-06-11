@@ -18,7 +18,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class ModListCommand {
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-		dispatcher.register(Commands.literal("modlist").requires(player -> player.hasPermission(3))
+		dispatcher.register(Commands.literal("modlist").requires(player -> player.hasPermission(ModListObserverConfig.CONFIG.modlistCommandPermissionLevel.get()))
 				.executes(ctx -> getModList(ctx, ctx.getSource().getPlayerOrException().getGameProfile(), false))
 				.then(Commands.argument("target", GameProfileArgument.gameProfile())
 						.executes(ctx -> getModList(ctx, GameProfileArgument.getGameProfiles(ctx, "target"), false))
