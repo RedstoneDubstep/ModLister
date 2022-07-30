@@ -1,6 +1,7 @@
 package redstonedubstep.mods.modlistobserver;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,10 +36,12 @@ public class ModListObserver {
 	}
 
 	public static Set<String> getAllSessionMods(GameProfile player) {
+		ALL_SESSION_MODS.putIfAbsent(player, new HashSet<>());
 		return ALL_SESSION_MODS.get(player);
 	}
 
 	public static Set<String> getCurrentMods(GameProfile player) {
+		CURRENT_MODS.putIfAbsent(player, new HashSet<>());
 		return CURRENT_MODS.get(player);
 	}
 
