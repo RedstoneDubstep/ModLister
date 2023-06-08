@@ -57,7 +57,7 @@ public class ModListCommand {
 		if (ctx.getSource().getEntity() instanceof ServerPlayer player)
 			player.sendSystemMessage(message);
 		else
-			ctx.getSource().sendSuccess(message, false);
+			ctx.getSource().sendSuccess(() -> message, false);
 
 		return modList.size();
 	}
