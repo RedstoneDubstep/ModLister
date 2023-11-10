@@ -2,16 +2,16 @@ package redstonedubstep.mods.modlistobserver;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
 
 public class ModListObserverConfig {
-	public static final ForgeConfigSpec SERVER_SPEC;
+	public static final ModConfigSpec SERVER_SPEC;
 	public static final Config CONFIG;
 
 	static {
-		final Pair<Config, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Config::new);
+		final Pair<Config, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Config::new);
 
 		SERVER_SPEC = specPair.getRight();
 		CONFIG = specPair.getLeft();
@@ -22,7 +22,7 @@ public class ModListObserverConfig {
 		public BooleanValue logServerMods;
 		public IntValue modlistCommandPermissionLevel;
 
-		Config(ForgeConfigSpec.Builder builder) {
+		Config(ModConfigSpec.Builder builder) {
 			logJoiningModList = builder
 					.comment(" --- ModListObserver Config File --- ", "Should the current mod list of joining players be logged?")
 					.define("logJoiningModList", true);
