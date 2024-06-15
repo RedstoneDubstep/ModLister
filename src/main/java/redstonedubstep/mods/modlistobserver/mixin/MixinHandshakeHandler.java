@@ -33,6 +33,9 @@ public abstract class MixinHandshakeHandler {
 		if (!ModListObserverConfig.CONFIG.logServerMods.get())
 			clientMods = clientMods.stream().filter(s -> !serverMods.contains(s)).toList();
 
+		if (ModListObserverConfig.CONFIG.allowlistEnabled.get())
+			clientMods = clientMods.stream().filter(s -> !ModListObserverConfig.CONFIG.allowlist.get().contains(s)).toList();
+
 		if (profile != null) {
 			if (!profile.isComplete())
 				profile = new GameProfile(UUIDUtil.getOrCreatePlayerUUID(profile), profile.getName());
