@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '[6.0, 6.2)', changing: true
         classpath 'org.spongepowered:mixingradle:0.7+'
         classpath 'org.parchmentmc:librarian:1.+'
     }
@@ -18,7 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'redstonedubstep.mods'
-version = '1.0.2'
+version = '1.0.3'
 archivesBaseName = 'modlistobserver'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
